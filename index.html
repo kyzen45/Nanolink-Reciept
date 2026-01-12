@@ -13,6 +13,13 @@
 
         .container {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .receipts-container {
+            display: flex;
             align-items: flex-start;
             justify-content: center;
             gap: 20px;
@@ -40,6 +47,10 @@
         }
 
         @media print {
+            @page {
+                size: 11in 8.5in;
+                margin: 0.5in;
+            }
             footer {
                 -webkit-print-color-adjust: exact;
                 color-adjust: exact;
@@ -47,13 +58,22 @@
             .form {
                 display: none;
             }
+            .receipts-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.2in;
+                justify-items: center;
+            }
+            .receipt {
+                margin: 0;
+            }
         }
 
         @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
-            .container {
+            .receipts-container {
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
@@ -66,6 +86,7 @@
             .form {
                 max-width: 100%;
                 width: 100%;
+                flex-direction: column;
             }
         }
 
@@ -91,8 +112,32 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
             font-family: Arial, sans-serif;
-            max-width: 300px;
             width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .receipt-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .button-group {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form h3 {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #007bff;
         }
 
         .form div {
@@ -151,7 +196,8 @@
 </head>
 <body>
     <div class="container">
-    <div class="receipt">
+    <div class="receipts-container">
+    <div class="receipt" id="receipt1">
         <!-- Receipt content goes here -->
         <img src="nanolinklogo.png" alt="Nanolink Logo" style="width: 200px; height: auto;">
         <div style="margin-bottom: 0px;">
@@ -161,12 +207,12 @@
                         <p style="font-weight: bold;">Model</p>
                     </div>
                 </div>
-                <div id="displayBox" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
-                      <span id="modelValue"></span>
+                <div class="displayBox" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                      <span class="modelValue"></span>
                 </div>
                 <p style="font-weight: bold;">Size</p>
-                <div id="displayBoxSize" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
-                      <span id="sizeValue"></span>
+                <div class="displayBoxSize" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                      <span class="sizeValue"></span>
                 </div>
                 <p style="font-weight: bold;">Address:</p>
                 <p>No.999 Jinqiao West Road Nantong High Tech industrial Development Zone, Jiangsu Province</p>
@@ -175,7 +221,7 @@
                         <p style="font-weight: bold;">Manufacturer:</p>
                         <p>Nantong Nanolink Materials Co., Ltd</p>
                     </div>
-                    <img id="barcodeImg" src="https://barcode.tec-it.com/barcode.ashx?data=NANTONGNANOLINK&code=Code128&dpi=96" alt="Barcode" style="margin-left: 10px; width: 150px; height: 50px;">
+                    <img class="barcodeImg" src="https://barcode.tec-it.com/barcode.ashx?data=NANTONGNANOLINK&code=Code128&dpi=96" alt="Barcode" style="margin-left: 10px; width: 150px; height: 50px;">
                 </div>
             </div>
         </div>
@@ -194,27 +240,230 @@
             PPF Future is with NANOlink
         </footer>
     </div>
+    <div class="receipt" id="receipt2">
+        <!-- Receipt content goes here -->
+        <img src="nanolinklogo.png" alt="Nanolink Logo" style="width: 200px; height: auto;">
+        <div style="margin-bottom: 0px;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 2px;">
+                    <div style="margin-right: 0;">
+                        <p style="font-weight: bold;">Model</p>
+                    </div>
+                </div>
+                <div class="displayBox" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                      <span class="modelValue"></span>
+                </div>
+                <p style="font-weight: bold;">Size</p>
+                <div class="displayBoxSize" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                      <span class="sizeValue"></span>
+                </div>
+                <p style="font-weight: bold;">Address:</p>
+                <p>No.999 Jinqiao West Road Nantong High Tech industrial Development Zone, Jiangsu Province</p>
+                <div style="display: flex; align-items: center;">
+                    <div>
+                        <p style="font-weight: bold;">Manufacturer:</p>
+                        <p>Nantong Nanolink Materials Co., Ltd</p>
+                    </div>
+                    <img class="barcodeImg" src="https://barcode.tec-it.com/barcode.ashx?data=NANTONGNANOLINK&code=Code128&dpi=96" alt="Barcode" style="margin-left: 10px; width: 150px; height: 50px;">
+                </div>
+            </div>
+        </div>
+        <div style="position: absolute; top: 20px; right: 20px; width: 85px; height: 85px; display: flex; justify-content: center; align-items: center;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.nanolinkphilippines.com/" alt="QR Code" style="width: 75px; height: 75px; padding: 2px;">
+            <div style="position: absolute; top: 0; left: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 2px; height: 20px; background: black;"></div>
+        </div>
+        <footer style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 40px; text-align: left; font-size: 16px; border: 1px solid black; background-color: black; color: white; display: flex; align-items: center; justify-content: flex-start; padding-left: 5px; z-index: 10;">
+            PPF Future is with NANOlink
+        </footer>
+    </div>
+    <div class="receipt" id="receipt3">
+        <!-- Receipt content goes here -->
+        <img src="nanolinklogo.png" alt="Nanolink Logo" style="width: 200px; height: auto;">
+        <div style="margin-bottom: 0px;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 2px;">
+                    <div style="margin-right: 0;">
+                        <p style="font-weight: bold;">Model</p>
+                    </div>
+                </div>
+                <div class="displayBox" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                      <span class="modelValue"></span>
+                </div>
+                <p style="font-weight: bold;">Size</p>
+                <div class="displayBoxSize" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                      <span class="sizeValue"></span>
+                </div>
+                <p style="font-weight: bold;">Address:</p>
+                <p>No.999 Jinqiao West Road Nantong High Tech industrial Development Zone, Jiangsu Province</p>
+                <div style="display: flex; align-items: center;">
+                    <div>
+                        <p style="font-weight: bold;">Manufacturer:</p>
+                        <p>Nantong Nanolink Materials Co., Ltd</p>
+                    </div>
+                    <img class="barcodeImg" src="https://barcode.tec-it.com/barcode.ashx?data=NANTONGNANOLINK&code=Code128&dpi=96" alt="Barcode" style="margin-left: 10px; width: 150px; height: 50px;">
+                </div>
+            </div>
+        </div>
+        <div style="position: absolute; top: 20px; right: 20px; width: 85px; height: 85px; display: flex; justify-content: center; align-items: center;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.nanolinkphilippines.com/" alt="QR Code" style="width: 75px; height: 75px; padding: 2px;">
+            <div style="position: absolute; top: 0; left: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 2px; height: 20px; background: black;"></div>
+        </div>
+        <footer style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 40px; text-align: left; font-size: 16px; border: 1px solid black; background-color: black; color: white; display: flex; align-items: center; justify-content: flex-start; padding-left: 5px; z-index: 10;">
+            PPF Future is with NANOlink
+        </footer>
+    </div>
+    <div class="receipt" id="receipt4">
+        <!-- Receipt content goes here -->
+        <img src="nanolinklogo.png" alt="Nanolink Logo" style="width: 200px; height: auto;">
+        <div style="margin-bottom: 0px;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 2px;">
+                    <div style="margin-right: 0;">
+                        <p style="font-weight: bold;">Model</p>
+                    </div>
+                </div>
+                <div class="displayBox" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                      <span class="modelValue"></span>
+                </div>
+                <p style="font-weight: bold;">Size</p>
+                <div class="displayBoxSize" style=" padding: 5px; margin: 2px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                      <span class="sizeValue"></span>
+                </div>
+                <p style="font-weight: bold;">Address:</p>
+                <p>No.999 Jinqiao West Road Nantong High Tech industrial Development Zone, Jiangsu Province</p>
+                <div style="display: flex; align-items: center;">
+                    <div>
+                        <p style="font-weight: bold;">Manufacturer:</p>
+                        <p>Nantong Nanolink Materials Co., Ltd</p>
+                    </div>
+                    <img class="barcodeImg" src="https://barcode.tec-it.com/barcode.ashx?data=NANTONGNANOLINK&code=Code128&dpi=96" alt="Barcode" style="margin-left: 10px; width: 150px; height: 50px;">
+                </div>
+            </div>
+        </div>
+        <div style="position: absolute; top: 20px; right: 20px; width: 85px; height: 85px; display: flex; justify-content: center; align-items: center;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.nanolinkphilippines.com/" alt="QR Code" style="width: 75px; height: 75px; padding: 2px;">
+            <div style="position: absolute; top: 0; left: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 2px; height: 20px; background: black;"></div>
+        </div>
+        <footer style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 40px; text-align: left; font-size: 16px; border: 1px solid black; background-color: black; color: white; display: flex; align-items: center; justify-content: flex-start; padding-left: 5px; z-index: 10;">
+            PPF Future is with NANOlink
+        </footer>
+    </div>
+    </div>
     <div class="form">
-        <div><label for="modelType">Model Type:</label><input id="modelType" type="text" placeholder="Enter model type"></div>
-        <div><label for="size">Size:</label><input id="size" type="text" placeholder="Enter size"></div>
-        <div><label for="barcodeText">Barcode Text:</label><input type="text" id="barcodeText" value="NANTONGNANOLINK"></div>
-         <button id="printBtn">Print</button>
-        <button id="clearBtn">Clear</button>
+        <div class="receipt-group">
+            <h3>Receipt 1</h3>
+            <div><label for="modelType1">Model Type:</label><input id="modelType1" type="text" placeholder="Enter model type"></div>
+            <div><label for="size1">Size:</label><input id="size1" type="text" placeholder="Enter size"></div>
+            <div><label for="barcodeText1">Barcode Text:</label><input type="text" id="barcodeText1" value="NANTONGNANOLINK"></div>
+        </div>
+
+        <div class="receipt-group">
+            <h3>Receipt 2</h3>
+            <div><label for="modelType2">Model Type:</label><input id="modelType2" type="text" placeholder="Enter model type"></div>
+            <div><label for="size2">Size:</label><input id="size2" type="text" placeholder="Enter size"></div>
+            <div><label for="barcodeText2">Barcode Text:</label><input type="text" id="barcodeText2" value="NANTONGNANOLINK"></div>
+        </div>
+
+        <div class="receipt-group">
+            <h3>Receipt 3</h3>
+            <div><label for="modelType3">Model Type:</label><input id="modelType3" type="text" placeholder="Enter model type"></div>
+            <div><label for="size3">Size:</label><input id="size3" type="text" placeholder="Enter size"></div>
+            <div><label for="barcodeText3">Barcode Text:</label><input type="text" id="barcodeText3" value="NANTONGNANOLINK"></div>
+        </div>
+
+        <div class="receipt-group">
+            <h3>Receipt 4</h3>
+            <div><label for="modelType4">Model Type:</label><input id="modelType4" type="text" placeholder="Enter model type"></div>
+            <div><label for="size4">Size:</label><input id="size4" type="text" placeholder="Enter size"></div>
+            <div><label for="barcodeText4">Barcode Text:</label><input type="text" id="barcodeText4" value="NANTONGNANOLINK"></div>
+        </div>
+
+        <div class="button-group">
+            <button id="printBtn">Print</button>
+            <button id="clearBtn">Clear All</button>
+        </div>
     </div>
     </div>
     <script>
-        document.getElementById('barcodeText').addEventListener('input', function() {
+        // Receipt 1
+        document.getElementById('barcodeText1').addEventListener('input', function() {
             var text = this.value;
             var url = 'https://barcode.tec-it.com/barcode.ashx?data=' + encodeURIComponent(text) + '&code=Code128&dpi=96';
-            document.getElementById('barcodeImg').src = url;
+            document.querySelector('#receipt1 .barcodeImg').src = url;
         });
 
-        document.getElementById('modelType').addEventListener('input', function() {
-            document.getElementById('modelValue').innerText = this.value;
+        document.getElementById('modelType1').addEventListener('input', function() {
+            document.querySelector('#receipt1 .modelValue').innerText = this.value;
         });
 
-        document.getElementById('size').addEventListener('input', function() {
-            document.getElementById('sizeValue').innerText = this.value;
+        document.getElementById('size1').addEventListener('input', function() {
+            document.querySelector('#receipt1 .sizeValue').innerText = this.value;
+        });
+
+        // Receipt 2
+        document.getElementById('barcodeText2').addEventListener('input', function() {
+            var text = this.value;
+            var url = 'https://barcode.tec-it.com/barcode.ashx?data=' + encodeURIComponent(text) + '&code=Code128&dpi=96';
+            document.querySelector('#receipt2 .barcodeImg').src = url;
+        });
+
+        document.getElementById('modelType2').addEventListener('input', function() {
+            document.querySelector('#receipt2 .modelValue').innerText = this.value;
+        });
+
+        document.getElementById('size2').addEventListener('input', function() {
+            document.querySelector('#receipt2 .sizeValue').innerText = this.value;
+        });
+
+        // Receipt 3
+        document.getElementById('barcodeText3').addEventListener('input', function() {
+            var text = this.value;
+            var url = 'https://barcode.tec-it.com/barcode.ashx?data=' + encodeURIComponent(text) + '&code=Code128&dpi=96';
+            document.querySelector('#receipt3 .barcodeImg').src = url;
+        });
+
+        document.getElementById('modelType3').addEventListener('input', function() {
+            document.querySelector('#receipt3 .modelValue').innerText = this.value;
+        });
+
+        document.getElementById('size3').addEventListener('input', function() {
+            document.querySelector('#receipt3 .sizeValue').innerText = this.value;
+        });
+
+        // Receipt 4
+        document.getElementById('barcodeText4').addEventListener('input', function() {
+            var text = this.value;
+            var url = 'https://barcode.tec-it.com/barcode.ashx?data=' + encodeURIComponent(text) + '&code=Code128&dpi=96';
+            document.querySelector('#receipt4 .barcodeImg').src = url;
+        });
+
+        document.getElementById('modelType4').addEventListener('input', function() {
+            document.querySelector('#receipt4 .modelValue').innerText = this.value;
+        });
+
+        document.getElementById('size4').addEventListener('input', function() {
+            document.querySelector('#receipt4 .sizeValue').innerText = this.value;
         });
 
         document.getElementById('printBtn').addEventListener('click', function() {
@@ -222,11 +471,14 @@
         });
 
         document.getElementById('clearBtn').addEventListener('click', function() {
-            document.getElementById('modelType').value = '';
-            document.getElementById('size').value = '';
-            document.getElementById('barcodeText').value = '';
-            document.getElementById('modelValue').innerText = '';
-            document.getElementById('sizeValue').innerText = '';
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('modelType' + i).value = '';
+                document.getElementById('size' + i).value = '';
+                document.getElementById('barcodeText' + i).value = 'NANTONGNANOLINK';
+                document.querySelector('#receipt' + i + ' .modelValue').innerText = '';
+                document.querySelector('#receipt' + i + ' .sizeValue').innerText = '';
+                document.querySelector('#receipt' + i + ' .barcodeImg').src = 'https://barcode.tec-it.com/barcode.ashx?data=NANTONGNANOLINK&code=Code128&dpi=96';
+            }
         });
     </script>
 </body>
