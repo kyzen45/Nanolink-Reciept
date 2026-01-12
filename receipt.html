@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <link rel="stylesheet" href="receipt.css">
+</head>
+<body>
+    <div class="container">
+    <div class="receipt">
+        <!-- Receipt content goes here -->
+        <img src="nanolinklogo.png" alt="Nanolink Logo" style="width: 100px; height: auto;">
+        <div style="margin-bottom: 2px;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 2px;">
+                    <div style="margin-right: 0;">
+                        <p>Model</p>
+                    </div>
+                </div>
+                <div id="displayBox" style=" padding: 5px; margin: 5px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                     <span id="modelValue"></span>
+                </div>
+                <p>Size</p>
+                <div id="displayBoxSize" style=" padding: 5px; margin: 5px 0; white-space: nowrap; overflow: hidden; height: 20px; width: 100%; box-sizing: border-box;">
+                     <span id="sizeValue"></span>
+                </div>
+                <p>Address:</p>
+                <p>No.999 Jinqiao West Road Nantong High Tech industrial Development Zone, Jiangsu Province</p>
+                <div style="display: flex; align-items: center;">
+                    <div>
+                        <p>Manufacturer:</p>
+                        <p>Nantong Nanolink Materials Co., Ltd</p>
+                    </div>
+                    <img id="barcodeImg" src="https://barcode.tec-it.com/barcode.ashx?data=NANTONGNANOLINK&code=Code128&dpi=96" alt="Barcode" style="margin-left: 10px; width: 150px; height: 50px;">
+                </div>
+            </div>
+        </div>
+        <div style="position: absolute; top: 20px; left: 280px; width: 85px; height: 85px; display: flex; justify-content: center; align-items: center;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.nanolinkphilippines.com/" alt="QR Code" style="width: 75px; height: 75px; padding: 2px;">
+            <div style="position: absolute; top: 0; left: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 2px; background: black;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 2px; height: 20px; background: black;"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 2px; height: 20px; background: black;"></div>
+        </div>
+        <footer style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 40px; text-align: left; font-size: 16px; border: 1px solid black; background-color: black; color: white; display: flex; align-items: center; justify-content: flex-start; padding-left: 5px; z-index: 10;">
+            PPF Future is with NANOlink
+        </footer>
+    </div>
+    <div class="form">
+        <div><label for="modelType">Model Type:</label><input id="modelType" type="text" placeholder="Enter model type"></div>
+        <div><label for="size">Size:</label><input id="size" type="text" placeholder="Enter size"></div>
+        <div><label for="barcodeText">Barcode Text:</label><input type="text" id="barcodeText" value="NANTONGNANOLINK"></div>
+         <button id="printBtn">Print</button>
+        <button id="clearBtn">Clear</button>
+    </div>
+    </div>
+    <script src="receipt.js"></script>
+</body>
+</html>
